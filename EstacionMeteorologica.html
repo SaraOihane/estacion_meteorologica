@@ -1,62 +1,68 @@
 <html>
   <head>
     <title>EstacionMetereologica</title>
- <script src="https://www.gstatic.com/charts/loader.js" type="text/javascript"></script>
- <script type="text/javascript">
+    <script src="https://www.gstatic.com/charts/loader.js" type="text/javascript"></script>
+    <script type="text/javascript">
       var jsonData;
-   function myCallback(dataWeGotViaJsonp) {
-       jsonData = dataWeGotViaJsonp['feeds'];
-   };
+      function myCallback(dataWeGotViaJsonp) {
+        jsonData = dataWeGotViaJsonp['feeds'];
+      };
     </script>
- <script src="https://api.thingspeak.com/channels/697497/feeds.json?results=70&amp;callback=myCallback" type="text/javascript"></script>
- <script type="text/javascript">
-   var jsonData1;
-   jsonData1 = jsonData;
+	
+ "Datos canal 1"
+    <script src="https://api.thingspeak.com/channels/697497/feeds.json?results=70&amp;callback=myCallback" type="text/javascript"></script>
+    <script type="text/javascript">
+      var jsonData1;
+      jsonData1 = jsonData;
     </script>
- <script src="https://api.thingspeak.com/channels/697498/feeds.json?results=70&amp;callback=myCallback" type="text/javascript"></script>
- <script type="text/javascript">
-   var jsonData2;
-   jsonData2 = jsonData;
+ "Datos canal 2"
+    <script src="https://api.thingspeak.com/channels/697498/feeds.json?results=70&amp;callback=myCallback" type="text/javascript"></script>
+    <script type="text/javascript">
+      var jsonData2;
+      jsonData2 = jsonData;
     </script> 
- <script type="text/javascript">
+	
+    <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = new google.visualization.DataTable();
-          data.addColumn('datetime','Tiempo');
-    data.addColumn('number','Humedad (%)');
-    data.addColumn('number','Temperatura (ºC)');
-  var dataLength;
+        data.addColumn('datetime','Tiempo');
+        data.addColumn('number','Humedad (%)');
+        data.addColumn('number','Temperatura (ºC)');
+        var dataLength;
         if (jsonData1.length < jsonData2.length) {
-   dataLength = jsonData1.length;}
-  else{
-   dataLength = jsonData2.length;}
+          dataLength = jsonData1.length;}
+        else{
+          dataLength = jsonData2.length;}
    
-  var dataAll =[];
-  for(var i = 0; i < dataLength; i++) {
-      dataAll.push(jsonData2[i])
-   dataAll.push(jsonData1[i])
-
-      };
+        var dataAll =[];
+        for(var i = 0; i < dataLength; i++) {
+          dataAll.push(jsonData2[i])
+          dataAll.push(jsonData1[i])
+	      };
+	 
         for(var i = 0; i < dataAll.length; i++) {
-      var timestamp = dataAll[i]['created_at'];
-   var Humedad = dataAll[i]['field1'];
-   var Temperatura = dataAll[i]['field2'];
-   data.addRow([new Date(timestamp), parseFloat(Humedad), parseFloat(Temperatura)])};
+          var timestamp = dataAll[i]['created_at'];
+          var Humedad = dataAll[i]['field1'];
+          var Temperatura = dataAll[i]['field2'];
+          data.addRow([new Date(timestamp), parseFloat(Humedad), parseFloat(Temperatura)])
+          };
+		  
         var options = {
           title: 'Información meteorológica', legend: {position: 'bottom'},
           curveType: 'function', colors: ['red','blue'],
           series: {0: {targetAxisIndex: 0}, 1: {targetAxisIndex: 1}},
-    vAxes: {0: {title: 'Humedad'}, 1: {title: 'Temperatura'}}
-        };
+          vAxes: {0: {title: 'Humedad'}, 1: {title: 'Temperatura'}}
+          };
 
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
         chart.draw(data, options);
-      }
+        }
     </script>
   </head>
   <body>
     <div id="curve_chart">
-</div>
-</body>
+    </div>
+  </body>
 </html>
