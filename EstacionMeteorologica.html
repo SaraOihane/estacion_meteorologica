@@ -9,15 +9,16 @@
       };
     </script>
 	
- "Datos canal 1"
-    <script src="https://api.thingspeak.com/channels/697497/feeds.json?results=70&amp;callback=myCallback" type="text/javascript"></script>
+    <script src="https://api.thingspeak.com/channels/698783/feeds.json?results=70&amp;callback=myCallback" type="text/javascript"></script>
     <script type="text/javascript">
+      "Datos canal 1"
       var jsonData1;
       jsonData1 = jsonData;
     </script>
- "Datos canal 2"
-    <script src="https://api.thingspeak.com/channels/697498/feeds.json?results=70&amp;callback=myCallback" type="text/javascript"></script>
+    
+    <script src="https://api.thingspeak.com/channels/698784/feeds.json?results=70&amp;callback=myCallback" type="text/javascript"></script>
     <script type="text/javascript">
+      "Datos canal 2"
       var jsonData2;
       jsonData2 = jsonData;
     </script> 
@@ -36,7 +37,7 @@
         else{
           dataLength = jsonData2.length;}
    
-		"Juntamos todos los datos en un array"
+	"Juntamos todos los datos en un array"
         var dataAll =[];
         for(var i = 0; i < dataLength; i++) {
           dataAll.push(jsonData2[i])
